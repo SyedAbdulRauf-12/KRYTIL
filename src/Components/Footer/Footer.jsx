@@ -4,11 +4,12 @@ import KrytilLogo from '../../assets/krytill.png'; // Make sure this path is cor
 import MailIcon from '../../assets/mail-contact.png'; // Assuming you have these icons
 import PhoneIcon from '../../assets/phone-icon.png';
 import LocationIcon from '../../assets/location-icon.png';
-import TwitterIcon from '../../assets/resume.png';
-import LinkedInIcon from '../../assets/resume.png';
-import YoutubeIcon from '../../assets/resume.png';
-import GithubIcon from '../../assets/resume.png';
-import UpArrowIcon from '../../assets/resume.png'; // Icon for scroll-to-top
+import TwitterIcon from '../../assets/twitter.png';
+import LinkedInIcon from '../../assets/linkedin.png';
+import YoutubeIcon from '../../assets/youtube.png';
+import GithubIcon from '../../assets/github.png';
+import InstagramIcon from '../../assets/instagram.png';
+import UpArrowIcon from '../../assets/up.png'; // Icon for scroll-to-top
 
 const Footer = () => {
 
@@ -58,7 +59,7 @@ const Footer = () => {
             <div className="footer__contact-info">
               <div className="footer__contact-item">
                 <img src={MailIcon} alt="Email" className="footer__contact-icon" />
-                <span>hello@krytil.com</span>
+                <span>Hello@krytil.com</span>
               </div>
               <div className="footer__contact-item">
                 <img src={PhoneIcon} alt="Phone" className="footer__contact-icon" />
@@ -123,6 +124,9 @@ const Footer = () => {
             </a>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <img src={GithubIcon} alt="GitHub" />
+            </a>
+             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src={InstagramIcon} alt="Instagram" />
             </a>
           </div>
         </div>
