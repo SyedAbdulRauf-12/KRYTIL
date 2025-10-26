@@ -26,7 +26,7 @@
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
-  font-size: 2rem; /* Kept original size */
+  font-size: 1.5rem; /* Kept original size */
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -75,7 +75,7 @@
   border-radius: 20px;
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color);
-  height: fit-content;
+  height: 810px;
   transition: all 0.3s ease;
 }
 
@@ -172,14 +172,15 @@
 /* Additional Info */
 .contact__additional {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   padding-top: 2rem;
   /* --- CHANGED --- */
   border-top: 1px solid var(--border-color);
+  align-items: center;
 }
 
-.contact__additional-item h4 {
+.contact__additional-item h3 {
   font-size: 0.875rem;
   font-weight: 600;
   /* --- CHANGED --- */
@@ -187,6 +188,7 @@
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  align-items: center;
 }
 
 .contact__additional-item p {
@@ -194,6 +196,7 @@
   color: var(--text-secondary);
   font-weight: 500;
   margin: 0;
+  align-items: center;
 }
 
 /* Contact Form */

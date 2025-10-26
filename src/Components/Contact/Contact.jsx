@@ -114,13 +114,13 @@ const Contact = () => {
 
             {/* Additional Info */}
             <div className="contact__additional">
-              <div className="contact__additional-item">
+              {/*<div className="contact__additional-item">
                 <h4>Response Time</h4>
                 <p>Within 24 hours</p>
-              </div>
+              </div>*/}
               <div className="contact__additional-item">
-                <h4>Office Hours</h4>
-                <p>Mon - Fri: 9AM - 6PM</p>
+                <h3>Office Hours: </h3>
+                 <p>Mon - Fri: 24 x 7</p>
               </div>
             </div>
           </div>

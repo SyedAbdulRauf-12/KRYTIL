@@ -3,6 +3,7 @@
   padding: 50px 0;
   background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
   overflow-x: hidden; /* Prevent horizontal scrollbar on page */
+  
 }
 
 .programs__container {
@@ -55,43 +56,65 @@
   margin: 0;
 }
 
-/* --- Autoscroll Wrapper --- */
+/* --- Wrapper and Grid for JS Draggable Scroll --- */
 .programs__scroll-wrapper {
   width: 100%;
-  overflow: hidden; /* Hide overflowing cards */
-  position: relative;
-  margin-bottom: 4rem; /* Spacing below the scroller */
+  overflow: visible !important; /* Hide the items that are off-screen */
+  margin-bottom: 4rem;
 }
 
-/* --- Programs Grid (Autoscroll Flex) --- */
-.programs__grid--autoscroll {
+.programs__grid--draggable {
   display: flex;
   flex-wrap: nowrap;
   gap: 2rem;
   padding: 1.5rem 0.25rem;
+  
+  /* --- Key Scroll Properties --- */
+  overflow-x: scroll !important; 
+  overflow-y: hidden !important;
+  
+  /* Enable momentum scrolling/touch-dragging (for better feel) */
+  -webkit-overflow-scrolling: touch; 
+  cursor: grab;
+  user-select: none; /* Prevent text selection during drag */
 
-  /* --- TEMPORARY: Use a very large fixed width --- */
-  width: calc( (350px + 2rem) * 8 ); /* Adjust if needed, make sure it's wider than both sets of cards */
-
-  /* --- TEMPORARY: Use simple animation value --- */
-  animation: autoscroll 40s linear infinite;
-
-  margin-bottom: 0;
+  /* Hide the scrollbar */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+}
+.programs__grid--draggable::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes autoscroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* Format: calc( -1 * ( ( <width> + <gap> ) * <cards_per_set> ) ) */
-    /* Ensure spaces: around -1 *, around +, around outer *, inside () */
-    transform: translateX( calc( -1 * ( ( 350px + 2rem ) * 4 ) ) );
-  }
+/* Style when dragging */
+.programs__grid--draggable.active-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto; /* Ensure smooth scroll is disabled during drag */
 }
 
-.programs__scroll-wrapper:hover .programs__grid--autoscroll {
-  animation-play-state: paused; /* Pause on hover */
+/* Card (Now an <a> tag) */
+.programs__card--draggable {
+  /* Inherit these from the base class, but ensure they are set */
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  
+  /* Essential sizing properties */
+  flex-shrink: 0;
+  width: 350px;
+  max-width: 90vw;
+  
+  /* Reset link styles */
+  text-decoration: none;
+  color: inherit;
+  
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  /* Removed animation transitions */
 }
 
 .programs__card {
@@ -103,7 +126,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /*transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);*/
   /* Essential for flex autoscroll */
   flex-shrink: 0;
   width: 350px;
@@ -112,17 +135,14 @@
 
 .programs__card:hover {
   /* Re-apply the vertical lift AND keep the animation paused */
-  transform: translateY(-10px);
   box-shadow: var(--card-shadow-hover);
-  /* Ensure the main animation stays paused on hover */
-  /* This might not be strictly needed if the wrapper pause works, but good safety */
   /* animation-play-state: paused; */
 }
 
 /* --- Rest of Card Styles --- */
 .programs__image-container {
   position: relative;
-  height: 220px;
+  height: 200px;
   overflow: hidden;
 }
 .programs__image {
@@ -227,15 +247,6 @@
   .programs__grid--autoscroll .programs__card:nth-child(n + 5) {
     display: none;
   }
-  .programs__grid--autoscroll {
-    display: grid; /* Change back to grid */
-    grid-template-columns: 1fr 1fr; /* Stack in a single column */
-    width: auto; /* Remove the large fixed width */
-    animation: none; /* Disable the autoscroll animation */
-    gap: 1.5rem; /* Keep the mobile gap */
-    padding: 0; /* Remove horizontal padding */
-    margin-bottom: 3rem; /* Add margin below grid */
-  }
 }
 @media (max-width: 768px) {
   .programs { padding: 60px 0; }
@@ -249,16 +260,6 @@
   .programs__scroll-wrapper {
     overflow: visible; /* Show all content */
     margin-bottom: 2rem; /* Add back some bottom margin */
-  }
-  /* 2. Revert the grid to a stacked layout */
-  .programs__grid--autoscroll {
-    display: grid; /* Change back to grid */
-    grid-template-columns: 1fr 1fr; /* Stack in a single column */
-    width: auto; /* Remove the large fixed width */
-    animation: none; /* Disable the autoscroll animation */
-    gap: 1.5rem; /* Keep the mobile gap */
-    padding: 0; /* Remove horizontal padding */
-    margin-bottom: 3rem; /* Add margin below grid */
   }
   /* 3. Allow cards to be full width */
   .programs__card {
