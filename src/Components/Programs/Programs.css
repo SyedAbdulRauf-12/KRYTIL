@@ -2,14 +2,13 @@
 .programs {
   padding: 50px 0;
   background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrollbar on page */
 }
 
 .programs__container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-  margin-top: 2rem;
 }
 
 /* Header Section */
@@ -17,10 +16,10 @@
   text-align: center;
   max-width: 800px;
   margin: 0 auto 4rem;
+  /* Animation properties moved to bottom */
 }
 
 .programs__badge {
-  /* --- CHANGED --- */
   background: var(--gradient-brand);
   color: white;
   padding: 0.5rem 1.5rem;
@@ -43,7 +42,6 @@
 }
 
 .gradient-text {
-  /* --- CHANGED --- */
   background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -57,12 +55,43 @@
   margin: 0;
 }
 
-/* --- Programs Grid (Back to 2 Columns) --- */
-.programs__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* --- Autoscroll Wrapper --- */
+.programs__scroll-wrapper {
+  width: 100%;
+  overflow: hidden; /* Hide overflowing cards */
+  position: relative;
+  margin-bottom: 4rem; /* Spacing below the scroller */
+}
+
+/* --- Programs Grid (Autoscroll Flex) --- */
+.programs__grid--autoscroll {
+  display: flex;
+  flex-wrap: nowrap;
   gap: 2rem;
-  margin-bottom: 4rem;
+  padding: 1.5rem 0.25rem;
+
+  /* --- TEMPORARY: Use a very large fixed width --- */
+  width: calc( (350px + 2rem) * 8 ); /* Adjust if needed, make sure it's wider than both sets of cards */
+
+  /* --- TEMPORARY: Use simple animation value --- */
+  animation: autoscroll 40s linear infinite;
+
+  margin-bottom: 0;
+}
+
+@keyframes autoscroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Format: calc( -1 * ( ( <width> + <gap> ) * <cards_per_set> ) ) */
+    /* Ensure spaces: around -1 *, around +, around outer *, inside () */
+    transform: translateX( calc( -1 * ( ( 350px + 2rem ) * 4 ) ) );
+  }
+}
+
+.programs__scroll-wrapper:hover .programs__grid--autoscroll {
+  animation-play-state: paused; /* Pause on hover */
 }
 
 .programs__card {
@@ -70,290 +99,204 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--card-shadow);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--border-color);
   position: relative;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Essential for flex autoscroll */
+  flex-shrink: 0;
+  width: 350px;
+  max-width: 90vw;
 }
 
 .programs__card:hover {
+  /* Re-apply the vertical lift AND keep the animation paused */
   transform: translateY(-10px);
   box-shadow: var(--card-shadow-hover);
+  /* Ensure the main animation stays paused on hover */
+  /* This might not be strictly needed if the wrapper pause works, but good safety */
+  /* animation-play-state: paused; */
 }
 
-.programs__card--active {
-  transform: translateY(-5px);
-}
-
-/* Image Container */
+/* --- Rest of Card Styles --- */
 .programs__image-container {
   position: relative;
   height: 220px;
   overflow: hidden;
 }
-
 .programs__image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
 }
-
-.programs__card:hover .programs__image {
-  transform: scale(1.05);
-}
-
 .programs__image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
   background: linear-gradient(45deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
   pointer-events: none;
 }
-
-/* Program Icon */
 .programs__icon {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  width: 50px;
-  height: 50px;
-  background: var(--icon-bg);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute; bottom: 1.5rem; left: 1.5rem; width: 50px; height: 50px;
+  background: var(--icon-bg); backdrop-filter: blur(10px); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-
-.programs__icon img {
-  width: 24px;
-  height: 24px;
-}
-
-/* Level Badge */
+.programs__icon img { width: 24px; height: 24px; }
 .programs__level {
-  position: absolute;
-  bottom: 2rem;
-  right: 1.5rem;
-  background: var(--icon-bg);
-  backdrop-filter: blur(10px);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--icon-text);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  position: absolute; bottom: 2rem; right: 1.5rem; background: var(--icon-bg);
+  backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 600; color: var(--icon-text);
+  text-transform: uppercase; letter-spacing: 0.05em;
 }
-
-/* Content */
 .programs__content {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  padding: 2rem; display: flex; flex-direction: column; flex-grow: 1;
 }
-
 .programs__card-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  line-height: 1.3;
-  min-height: 3.9rem;
+  font-size: 1.5rem; font-weight: 700; color: var(--text-primary);
+  margin-bottom: 1rem; line-height: 1.3; min-height: 3.9rem;
 }
-
 .programs__card-description {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  color: var(--text-secondary); line-height: 1.6; margin-bottom: 0; font-size: 0.95rem;
 }
-
-/* Program Meta */
 .programs__meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-top: 1px solid var(--border-color);
-  margin-bottom: -1.75rem;
-  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 0; border-top: 1px solid var(--border-color);
+  margin-bottom: 0; 
 }
-
-.programs__duration {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.programs__meta-label {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-}
-
-.programs__meta-value {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  font-weight: 600;
-}
+.programs__duration { display: flex; flex-direction: column; gap: 0.25rem; }
+.programs__meta-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.programs__meta-value { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; }
 
 /* CTA Button */
 .programs__cta {
   width: 100%;
-  /* --- CHANGED --- */
   background: var(--gradient-brand);
-  color: white;
-  border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
+  color: white; border: none; padding: 1rem 1.5rem; border-radius: 12px;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer;
+  transition: all 0.3s ease; display: flex; align-items: center;
+  justify-content: center; gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  margin-top: 1rem; /* Ensure space above button */
+  display: flex; /* Makes the a-tag behave like the old button */
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); /* Kept old shadow */
+  text-decoration: none;
 }
-
 .programs__cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); /* Kept old shadow */
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
+.programs__cta-arrow { width: 16px; height: 16px; transition: transform 0.3s ease; }
+.programs__cta:hover .programs__cta-arrow { transform: translateX(3px); }
 
-.programs__cta-arrow {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.3s ease;
-}
-
-.programs__cta:hover .programs__cta-arrow {
-  transform: translateX(3px);
-}
-
-/* Bottom CTA (Full width) */
+/* Bottom CTA (inside container) */
 .programs__bottom-cta {
-  text-align: center;
-  background: var(--bottom-cta-bg);
-  color: var(--bottom-cta-text);
-  border-radius: 20px; /* Rounded */
-  padding: 3rem;
-  transition: all 0.3s ease;
-  margin-top: 2rem;
+  text-align: center; background: var(--bottom-cta-bg); color: var(--bottom-cta-text);
+  border-radius: 20px; padding: 3rem; transition: all 0.3s ease;
+  margin-top: 0; /* Removed top margin */
+  /* Animation properties moved to bottom */
 }
-
-.programs__cta-text {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  color: var(--bottom-cta-subtext);
-}
-
-.programs__cta-highlight {
-  /* --- CHANGED --- */
-  /* Using gradient here might be too much, kept a single color */
-  color: #3b82f6; /* Adjust if needed */
-  font-weight: 600;
-}
-
+.programs__cta-text { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--bottom-cta-subtext); }
+.programs__cta-highlight { color: #3b82f6; font-weight: 600; }
 .programs__advisor-btn {
-  /* --- CHANGED --- */
-  background: green;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); /* Kept old shadow */
+  background: green; color: white; border: none; padding: 1rem 2rem; border-radius: 50px;
+  font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
-
 .programs__advisor-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); /* Kept old shadow */
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 /* Responsive Design */
 @media (max-width: 968px) {
-  .programs__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+  .programs { padding: 60px 0; }
+  .programs__container { padding: 0 1rem; }
+  .programs__title { font-size: 3rem; }
+  .programs__badge {font-size: 1.5rem;}
+  .programs__subtitle{font-size: 1.5rem;}
+  /* Make cards slightly smaller on mobile */
+  .programs__card { width:300px; height: 500px; }
+  .programs__bottom-cta { padding: 2rem 1.5rem; }
+  .programs__cta-text { font-size: 1.125rem; }
+  .programs__scroll-wrapper {
+    overflow: visible; /* Show all content */
+    margin-bottom: 2rem; /* Add back some bottom margin */
+  }
+  .programs__grid--autoscroll .programs__card:nth-child(n + 5) {
+    display: none;
+  }
+  .programs__grid--autoscroll {
+    display: grid; /* Change back to grid */
+    grid-template-columns: 1fr 1fr; /* Stack in a single column */
+    width: auto; /* Remove the large fixed width */
+    animation: none; /* Disable the autoscroll animation */
+    gap: 1.5rem; /* Keep the mobile gap */
+    padding: 0; /* Remove horizontal padding */
+    margin-bottom: 3rem; /* Add margin below grid */
   }
 }
-
 @media (max-width: 768px) {
-  .programs {
-    padding: 60px 0;
+  .programs { padding: 60px 0; }
+  .programs__container { padding: 0 1rem; }
+  .programs__title { font-size: 2rem; }
+  .programs__badge {font-size: 1rem;}
+  /* Make cards slightly smaller on mobile */
+  .programs__card { width: 350px; }
+  .programs__bottom-cta { padding: 2rem 1.5rem; }
+  .programs__cta-text { font-size: 1.125rem; }
+  .programs__scroll-wrapper {
+    overflow: visible; /* Show all content */
+    margin-bottom: 2rem; /* Add back some bottom margin */
   }
-  .programs__container {
-    padding: 0 1rem;
+  /* 2. Revert the grid to a stacked layout */
+  .programs__grid--autoscroll {
+    display: grid; /* Change back to grid */
+    grid-template-columns: 1fr 1fr; /* Stack in a single column */
+    width: auto; /* Remove the large fixed width */
+    animation: none; /* Disable the autoscroll animation */
+    gap: 1.5rem; /* Keep the mobile gap */
+    padding: 0; /* Remove horizontal padding */
+    margin-bottom: 3rem; /* Add margin below grid */
   }
-  .programs__title {
-    font-size: 2rem;
-  }
-  .programs__grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .programs__bottom-cta {
-    padding: 2rem 1.5rem;
-  }
-  .programs__cta-text {
-    font-size: 1.125rem;
+  /* 3. Allow cards to be full width */
+  .programs__card {
+    width: 100%; /* Let card take full container width */
+    flex-shrink: 1; /* Allow shrinking (default) */
   }
 }
-
 @media (max-width: 480px) {
-  .programs__content {
-    padding: 1.5rem;
-  }
-  .programs__card-title {
-    font-size: 1.25rem;
-  }
-  .programs__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+  .programs__content { padding: 1.5rem; }
+  .programs__card-title { font-size: 1.25rem; }
+  /* Make cards even smaller */
+  .programs__card { width: 260px; }
+   /* Adjust width calculation for animation */
+  .programs__grid--autoscroll { width: calc( (260px + 32px) * 8 ); }
+  .programs__meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
 
-/* --- BUG FIX FOR EXPLORE BUTTON --- */
-.programs .programs__grid .programs__card .programs__content .programs__cta {
-  /* --- CHANGED --- */
+/* --- BUTTON FIX (Selector updated) --- */
+.programs .programs__scroll-wrapper .programs__grid--autoscroll .programs__card .programs__content .programs__cta {
   background: var(--gradient-brand) !important;
   color: white !important;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
 }
-
-.programs .programs__grid .programs__card .programs__content .programs__cta:hover {
-  /* --- CHANGED --- */
+.programs .programs__scroll-wrapper .programs__grid--autoscroll .programs__card .programs__content .programs__cta:hover {
   background: var(--gradient-brand) !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
 }
 
+/* --- Fade-in Animations (Applied only to Header and Bottom CTA) --- */
 .programs__header,
-.programs__card,
-.programs__bottom-cta{
+.programs__bottom-cta {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-
 .programs__header.is-visible,
-.programs__card.is-visible,
-.programs__bottom-cta.is-visible{
+.programs__bottom-cta.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
