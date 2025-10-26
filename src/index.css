@@ -8,8 +8,8 @@
 }
 
 body {
-  background: #f5f5f5;
   font-family: "Open Sans", sans-serif;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
 }
 
 a {
@@ -60,4 +60,74 @@ h1, h2, h3, h4, h5, h6 {
 p, span, li {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
+}
+
+/* In index.css */
+
+/* 1. Define light mode colors on the :root (which is the light theme by default) */
+:root {
+  --bg-color: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --border-color: #f1f5f9;
+  --gradient-start: #3b82f6;
+  --gradient-end: #f65c5c;
+  --card-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --icon-bg: rgba(0, 0, 0, 0.95);
+  --icon-text: #ffffff;
+  --bottom-cta-bg: linear-gradient(135deg, #3b82f6 15%, #007a04 30%, #cace00 50%, #f65c5c 80%);
+  --bottom-cta-text: white;
+  --bottom-cta-subtext: #e5e7eb;
+  --light-theme-bg: #ffffff;
+  --light-theme-text: #1f2937;
+  --dark-theme-bg: #111827;
+  --dark-theme-text: #f9fafb;
+  --gradient-brand: linear-gradient(135deg, #3b82f6 15%, #007a04 30%, #cace00 50%, #f65c5c 80%);
+  --input-bg: white;
+  --gradient-focus-ring: rgba(59, 130, 246, 0.1);
+  --placeholder-text: #9ca3af;
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --success-border: #bbf7d0;
+  --error-bg: #fef2f2;
+  --error-text: #991b1b;
+  --error-border: #fecaca;
+}
+
+/* 2. Define dark mode colors when the body has the 'dark' class */
+body.dark {
+  --bg-color: #111827; /* Dark background */
+  --bg-secondary: #111827; /* Darker background for sections */
+  --text-primary: #f9fafb; /* Light text */
+  --text-secondary: #d1d5db; /* Lighter grey text */
+  --card-bg: #1f2937; /* Dark card background */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --border-color: #374151; /* Darker border */
+  --card-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.3);
+  --icon-bg: rgba(255, 255, 255, 0.1);
+  --icon-text: var(--text-primary);
+  --bottom-cta-bg: linear-gradient(135deg, var(--bg-secondary) 0%, var(--card-bg) 100%);
+  --bottom-cta-text: var(--text-primary);
+  --bottom-cta-subtext: var(--text-secondary);
+  --input-bg: var(--card-bg); /* Use card background for inputs */
+  --gradient-focus-ring: rgba(59, 130, 246, 0.2);
+  --placeholder-text: #6b7280;
+  --success-bg: rgba(22, 101, 52, 0.3); /* Dark green */
+  --success-text: #bbf7d0;
+  --success-border: #166534;
+  --error-bg: rgba(153, 27, 27, 0.3); /* Dark red */
+  --error-text: #fecaca;
+  --error-border: #991b1b;
+  
+  /* You can keep gradients the same, or adjust */
+  /* --gradient-start: #4f8fff; */
+  /* --gradient-end: #a485ff; */
+}
+
+/* 3. Add a smooth transition */
+body, .programs__card, .about {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

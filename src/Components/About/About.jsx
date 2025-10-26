@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./About.css";
-import about_img from "../../assets/about.png";
+import about_img from "../../assets/GIF/letters-fall.gif";
 import play_icon from "../../assets/play-icon.png";
+
+// --- 1. Import the hook from the library you just installed ---
+import { useInView } from 'react-intersection-observer';
 
 const About = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -12,11 +15,25 @@ const About = () => {
     console.log("Play video clicked");
   };
 
+  // --- 2. Set up the hook to watch the section ---
+  const { ref, inView } = useInView({
+    triggerOnce: false,  // Only animates once
+    threshold: 0.1,     // Triggers when 10% of the section is visible
+  });
+
   return (
-    <section className="about" id="about">
+    // --- 3. Attach the 'ref' to your main section ---
+    <section className="about" id="about" ref={ref}>
       <div className="about__container">
+        
+        {/* --- 4. Add the conditional 'is-visible' class to each element --- */}
+
+        <span className={`about__badge ${inView ? 'is-visible' : ''}`}>
+          ABOUT KRYTIL
+        </span>
+
         {/* Left Column - Image */}
-        <div className="about__left">
+        <div className={`about__left ${inView ? 'is-visible' : ''}`}>
           <div className="about__image-wrapper">
             <img 
               src={about_img} 
@@ -25,7 +42,7 @@ const About = () => {
             />
             <div className="about__image-overlay"></div>
             
-            {/* Play Button */}
+            {/* Play Button 
             <button 
               className="about__play-btn" 
               onClick={handlePlayVideo}
@@ -37,15 +54,13 @@ const About = () => {
                 className="about__play-icon" 
               />
               <span>Watch Our Story</span>
-            </button>
+            </button>*/}
           </div>
         </div>
 
         {/* Right Column - Content */}
-        <div className="about__right">
+        <div className={`about__right ${inView ? 'is-visible' : ''}`}>
           <div className="about__content">
-            <span className="about__badge">ABOUT KRYTIL</span>
-            
             <h2 className="about__title">
               Our Vision: Where Tech Careers Get <span className="highlight">Real.</span>
             </h2>
@@ -72,26 +87,17 @@ const About = () => {
               </p>
             </div>
 
-            {/* Stats Section */}
+            {/* Stats Section 
             <div className="about__stats">
-              <div className="about__stat">
-                <span className="about__stat-number">1000+</span>
-                <span className="about__stat-label">Students Trained</span>
-              </div>
-              <div className="about__stat">
-                <span className="about__stat-number">95%</span>
-                <span className="about__stat-label">Placement Rate</span>
-              </div>
-              <div className="about__stat">
-                <span className="about__stat-number">50+</span>
-                <span className="about__stat-label">Industry Partners</span>
-              </div>
-            </div>
+              ...
+            </div>*/}
 
             {/* CTA Button */}
-            <button className="about__cta-btn">
-              Start Your Journey
-            </button>
+            <a href="#contact">
+              <button className="about__cta-btn">
+                Start Your Journey
+              </button>
+            </a>
           </div>
         </div>
       </div>

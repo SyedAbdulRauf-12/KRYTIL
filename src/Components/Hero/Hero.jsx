@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Hero.css'
 import dark_arrow from '../../assets/dark-arrow.png'
-import play_icon from '../../assets/play-icon.png'
+//import play_icon from '../../assets/play-icon.png'
 
 const Hero = () => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -20,10 +20,10 @@ const Hero = () => {
     programsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleWatchVideo = () => {
+  /*const handleWatchVideo = () => {
     // Add video modal or redirect logic here
     console.log("Play video clicked");
-  };
+  };*/
 
   return (
     <section className="hero" id="hero">
@@ -36,28 +36,30 @@ const Hero = () => {
       <div className="hero__container container">
         {/* Main Content */}
         <div className="hero__content">
-          {/* Badge */}
+          {/* Badge 
           <div className="hero__badge">
             <span>🚀 Trusted by 10,000+ Career Changers</span>
-          </div>
+          </div>*/}
 
           {/* Main Heading */}
           <h1 className="hero__title">
-            We Ensure 
-            <span className="hero__typing">
+            <div>We Ensure</div>
+            <div>
+              <span className="hero__typing">
               {" "}{words[currentWord]}{" "}
             </span>
-            Expertise For A Better Career
+            </div>
+            <div>Expertise For A Better Career</div>
           </h1>
 
-          {/* Description */}
+          {/* Description 
           <p className="hero__description">
             Our cutting-edge curriculum is designed to empower you with the real-world skills, 
             industry projects, and direct connections needed to excel in the dynamic field of tech.
-          </p>
+          </p>*/}
 
           {/* Stats */}
-          <div className="hero__stats">
+          {/*<div className="hero__stats">
             <div className="hero__stat">
               <span className="hero__stat-number">95%</span>
               <span className="hero__stat-label">Placement Rate</span>
@@ -70,7 +72,7 @@ const Hero = () => {
               <span className="hero__stat-number">6 Months</span>
               <span className="hero__stat-label">To Your Dream Job</span>
             </div>
-          </div>
+          </div>*/}
 
           {/* CTA Buttons */}
           <div className="hero__buttons">
@@ -79,13 +81,13 @@ const Hero = () => {
               <img src={dark_arrow} alt="" className="hero__btn-icon" />
             </button>
             
-            <button className="hero__btn hero__btn--secondary" onClick={handleWatchVideo}>
+            {/*<button className="hero__btn hero__btn--secondary" onClick={handleWatchVideo}>
               <img src={play_icon} alt="" className="hero__play-icon" />
               Watch Success Story
-            </button>
+            </button>*/}
           </div>
 
-          {/* Trust Badges */}
+           {/*Trust Badges 
           <div className="hero__trust">
             <span className="hero__trust-label">Trusted by graduates at</span>
             <div className="hero__companies">
@@ -94,7 +96,7 @@ const Hero = () => {
               <span className="hero__company">Microsoft</span>
               <span className="hero__company">Meta</span>
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
 

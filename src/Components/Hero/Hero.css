@@ -5,7 +5,13 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: url('../../assets//hero.png')
+  
+  /* --- 1. BACKGROUND GIF STYLES --- */
+  /* Replace this URL with your new GIF */
+  background-image: url('src/assets/GIF/giphy.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: non-repeat;
 }
 
 .hero__background {
@@ -17,33 +23,11 @@
   z-index: -2;
 }
 
-.hero__gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.9) 0%, 
-    rgba(139, 92, 246, 0.8) 50%, 
-    rgba(236, 72, 153, 0.7) 100%);
-}
-
-.hero__pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 0),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 50px 50px, 30px 30px;
-}
+/* ... (Your gradient and pattern overlays are commented out, which is good) ... */
 
 .hero__container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
   width: 100%;
@@ -54,6 +38,12 @@
 /* Content */
 .hero__content {
   max-width: 600px;
+  
+  /* --- 2. CENTER CONTENT --- */
+  /* This centers the whole text/button block on the screen */
+  margin: 0 auto;
+  /* This centers the text and badge inside the block */
+  text-align: center;
 }
 
 .hero__badge {
@@ -72,10 +62,113 @@
 .hero__title {
   font-size: 3.5rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
   color: white;
   margin-bottom: 1.5rem;
   letter-spacing: -0.025em;
+  text-align: center;
+}
+
+/* --- THIS IS THE FIX --- */
+.hero__typing {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+
+  /* 1. Prevent text inside from wrapping */
+  white-space: nowrap; 
+
+}
+
+.hero__typing::after {
+  content: "|";
+  animation: blink 1s infinite;
+  color: #fbbf24;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.hero__description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2.5rem;
+}
+
+/* ... (hero__stats are unchanged) ... */
+
+/* Buttons */
+.hero__buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+  
+  /* --- 3. CENTER BUTTONS --- */
+  /* This centers the buttons within the hero__content block */
+  justify-content: center;
+}
+
+/* ... (All .hero__btn styles are unchanged) ... */
+
+/* Trust Section */
+.hero__trust {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transform: translateY(-20px);
+  
+  /* --- 4. CENTER TRUST SECTION --- */
+  justify-content: center;
+}
+
+.hero__trust-label {
+  color: rgb(255, 255, 255);
+  font-size: 0.875rem;
+  font-weight: bolder;
+}
+
+.hero__companies {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  /* --- 5. CENTER COMPANIES --- */
+  justify-content: center;
+}
+
+/* ... (hero__company and scroll indicator are unchanged) ... */
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .hero__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    /* We moved text-align to the main class, so it's safe to remove */
+    /* text-align: center; */
+  }
+  
+  .hero__content {
+    max-width: 100%;
+  }
+  
+  .hero__title {
+    font-size: 2.75rem;
+  }
+  
+  .hero__illustration {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 .hero__typing {
@@ -137,9 +230,9 @@
 /* Buttons */
 .hero__buttons {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
   margin-bottom: 3rem;
-  flex-wrap: wrap;
+  white-space: nowrap;
 }
 
 .hero__btn {
@@ -201,12 +294,13 @@
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  transform: translateY(-20px);
 }
 
 .hero__trust-label {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255, 255, 255);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: bolder;
 }
 
 .hero__companies {
@@ -230,7 +324,7 @@
 /* Scroll Indicator */
 .hero__scroll-indicator {
   position: absolute;
-  bottom: 2rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -248,6 +342,7 @@
   background: rgba(255, 255, 255, 0.7);
   border-radius: 1px;
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .hero__scroll-arrow::after {
@@ -270,7 +365,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 968px) {
+@media (max-width: 68px) {
   .hero__container {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -292,7 +387,7 @@
 }
 
 @media (max-width: 768px) {
-  .hero__title {
+.hero__title {
     font-size: 2.25rem;
   }
   
@@ -304,20 +399,8 @@
     flex-direction: column;
     gap: 1rem;
   }
-  
-  .hero__buttons {
-    justify-content: center;
-  }
-  
-  .hero__trust {
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .hero__companies {
-    justify-content: center;
-  }
 }
+  
 
 @media (max-width: 480px) {
   .hero__title {
