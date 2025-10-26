@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import "./Contact.css";
-import msg_icon from "../../assets/msg-icon.png";
+import msg_icon from "../../assets/mail-contact.png";
 import mail_icon from "../../assets/mail-icon.png";
 import phone_icon from "../../assets/phone-icon.png";
 import location_icon from "../../assets/location-icon.png";
 import white_arrow from '../../assets/white-arrow.png';
+import { useInView } from 'react-intersection-observer';
 
 const Contact = () => {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -49,8 +55,8 @@ const Contact = () => {
     },
     {
       icon: phone_icon,
-      text: "+91 00000 00000",
-      link: "tel:+910000000000"
+      text: "+91 96635 15839",
+      link: "tel:+91 9663515839"
     },
     {
       icon: location_icon,
@@ -60,10 +66,10 @@ const Contact = () => {
   ];
 
   return (
-    <section className="contact" id="contact">
+    <section className="contact" id="contact" ref={ref}>
       <div className="contact__container">
         {/* Header Section */}
-        <div className="contact__header">
+        <div className={`contact__header ${inView ? 'is-visible' : ''}`}>
           <span className="contact__badge">Get In Touch</span>
           <h2 className="contact__title">
             Ready to Start Your <span className="gradient-text">Tech Journey</span>?
@@ -75,7 +81,7 @@ const Contact = () => {
 
         <div className="contact__content">
           {/* Contact Information */}
-          <div className="contact__info">
+          <div className={`contact__info ${inView ? 'is-visible' : ''}`}>
             <div className="contact__info-header">
               <div className="contact__info-icon">
                 <img src={msg_icon} alt="Message icon" />
@@ -120,7 +126,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="contact__form-container">
+          <div className={`contact__form-container ${inView ? 'is-visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
             <form onSubmit={onSubmit} className="contact__form">
               <div className="form__group">
                 <label htmlFor="name" className="form__label">
@@ -152,7 +158,7 @@ const Contact = () => {
 
               <div className="form__group">
                 <label htmlFor="phone" className="form__label">
-                  Phone Number
+                  Phone Number *
                 </label>
                 <input
                   type="tel"
@@ -165,18 +171,18 @@ const Contact = () => {
 
               <div className="form__group">
                 <label htmlFor="interest" className="form__label">
-                  Program Interest
+                  Subject
                 </label>
                 <select 
                   id="interest" 
                   name="interest" 
                   className="form__select"
                 >
-                  <option value="">Select a program</option>
+                  <option value="">Select </option>
                   <option value="ai-school">AI School</option>
-                  <option value="full-stack">Full Stack Development</option>
-                  <option value="cybersecurity">Cybersecurity</option>
-                  <option value="cloud">Cloud Computing</option>
+                  <option value="full-stack">Partnership</option>
+                  <option value="cybersecurity">General Inquiry</option>
+                  <option value="cloud">Technical Support</option>
                   <option value="other">Other</option>
                 </select>
               </div>

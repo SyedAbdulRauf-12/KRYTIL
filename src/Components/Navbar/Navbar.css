@@ -1,27 +1,30 @@
+/* --- Navbar Base --- */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 1rem 0;
-  background: rgba(255, 255, 255, 0.95);
+  /* --- CHANGED --- */
+  background: var(--bg-color);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
 }
 
 .navbar--sticky {
-  padding: 0.75rem 0;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 0;
+  /* --- CHANGED --- */
+  background: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar__container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +38,8 @@
 }
 
 .navbar__logo {
-  height: 2.5rem;
+  height: 2rem; /* Increased from 2.5rem (adjust as you like) */
+  
   width: auto;
   transition: transform 0.3s ease;
 }
@@ -44,6 +48,7 @@
   transform: scale(1.05);
 }
 
+/* --- Desktop Menu --- */
 .navbar__menu {
   display: flex;
   align-items: center;
@@ -54,7 +59,8 @@
 }
 
 .navbar__link {
-  color: #4b5563;
+  /* --- CHANGED --- */
+  color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
@@ -71,12 +77,14 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  /* --- CHANGED --- */
+  background: var(--gradient-brand);
   transition: width 0.3s ease;
 }
 
 .navbar__link:hover {
-  color: #1f2937;
+  /* --- CHANGED --- */
+  color: var(--text-primary);
 }
 
 .navbar__link:hover::after {
@@ -84,7 +92,8 @@
 }
 
 .navbar__link--active {
-  color: #3b82f6;
+  /* --- CHANGED --- */
+  color: var(--gradient-start);
 }
 
 .navbar__link--active::after {
@@ -92,7 +101,8 @@
 }
 
 .navbar__cta {
-  background: #c21313;
+  /* --- CHANGED (to match your other buttons) --- */
+  background: var(--gradient-brand);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 3rem;
@@ -109,6 +119,7 @@
   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
 }
 
+/* --- Hamburger & Mobile Menu --- */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
@@ -122,7 +133,8 @@
 .navbar__hamburger span {
   width: 1.5rem;
   height: 2px;
-  background: #374151;
+  /* --- CHANGED --- */
+  background: var(--text-primary);
   transition: all 0.3s ease;
   transform-origin: center;
 }
@@ -130,11 +142,9 @@
 .navbar__hamburger--active span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
-
 .navbar__hamburger--active span:nth-child(2) {
   opacity: 0;
 }
-
 .navbar__hamburger--active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
 }
@@ -146,9 +156,10 @@
   width: 80%;
   max-width: 300px;
   height: 100vh;
-  background: white;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease;
+  /* --- CHANGED --- */
+  background: var(--bg-color);
+  box-shadow: var(--card-shadow);
+  transition: right 0.3s ease, background-color 0.3s ease;
   z-index: 1001;
   padding: 5rem 1.5rem 2rem;
 }
@@ -169,7 +180,8 @@
 .navbar__mobile-link {
   display: block;
   padding: 1rem 1.5rem;
-  color: #374151;
+  /* --- CHANGED --- */
+  color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
   border-radius: 0.5rem;
@@ -178,18 +190,21 @@
 }
 
 .navbar__mobile-link:hover {
-  background: #f3f4f6;
-  color: #1f2937;
+  /* --- CHANGED --- */
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .navbar__mobile-link--active {
-  background: #eff6ff;
-  color: #3b82f6;
+  /* --- CHANGED --- */
+  background: var(--gradient-bg-light);
+  color: var(--gradient-start);
 }
 
 .navbar__mobile-cta {
   display: block;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  /* --- CHANGED --- */
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: white;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
@@ -206,7 +221,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  /* --- CHANGED --- */
+  background: var(--overlay-bg);
   z-index: 999;
 }
 
@@ -214,24 +230,90 @@
   .navbar__menu {
     display: none;
   }
-
   .navbar__hamburger {
     display: flex;
   }
-
   .navbar__container {
     padding: 0 1rem;
   }
-
 }
 
 @media (max-width: 480px) {
-  
   .navbar {
     padding: 0.75rem 0;
   }
-  
   .navbar--sticky {
     padding: 0.5rem 0;
   }
+}
+
+/* --- NEW, HYPER-SPECIFIC THEME TOGGLE STYLES --- */
+/* (This replaces the old code at the bottom of your file) */
+
+/* Desktop Theme Toggle Button */
+.navbar .navbar__menu .navbar__item .navbar__theme-toggle {
+  /* --- Light Mode (Moon 🌙) --- */
+  /* Show moon with a DARK background */
+  background: var(--dark-theme-bg);
+  color: var(--dark-theme-text);
+  
+  border: 1px solid var(--border-color);
+  padding: 8px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.navbar .navbar__menu .navbar__item .navbar__theme-toggle:hover {
+  background: var(--text-secondary);
+}
+
+/* This rule inverts the colors when in dark mode */
+body.dark .navbar .navbar__menu .navbar__item .navbar__theme-toggle {
+  /* --- Dark Mode (Sun ☀️) --- */
+  /* Show sun with a LIGHT background */
+  background: var(--light-theme-bg);
+  color: var(--light-theme-text);
+
+  border: 1px solid var(--border-color);
+}
+
+body.dark .navbar .navbar__menu .navbar__item .navbar__theme-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+/* --- Mobile Theme Toggle Button --- */
+.navbar__mobile .navbar__mobile-menu .navbar__mobile-item .navbar__mobile-theme-toggle {
+  /* --- Light Mode (Moon 🌙) --- */
+  /* Show moon with a DARK background */
+  background: var(--dark-theme-bg);
+  color: var(--dark-theme-text);
+
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.navbar__mobile .navbar__mobile-menu .navbar__mobile-item .navbar__mobile-theme-toggle:hover {
+  background: var(--text-secondary);
+}
+
+/* This rule inverts the colors when in dark mode */
+body.dark .navbar__mobile .navbar__mobile-menu .navbar__mobile-item .navbar__mobile-theme-toggle {
+  /* --- Dark Mode (Sun ☀️) --- */
+  /* Show sun with a LIGHT background */
+  background: var(--light-theme-bg);
+  color: var(--light-theme-text);
+}
+
+body.dark .navbar__mobile .navbar__mobile-menu .navbar__mobile-item .navbar__mobile-theme-toggle:hover {
+  background: var(--bg-secondary);
 }

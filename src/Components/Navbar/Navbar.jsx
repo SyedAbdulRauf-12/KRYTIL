@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
 import './Navbar.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/krytill.png';
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => { // Props are already here
   const [sticky, setSticky] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activeLink, setActiveLink] = useState('hero');
@@ -23,10 +23,10 @@ const Navbar = () => {
 
   const navItems = [
     { to: 'hero', label: 'Home', offset: 0 },
-    { to: 'program', label: 'Program', offset: -260 },
-    { to: 'about', label: 'About Us', offset: -150 },
-    { to: 'carrer', label: 'Careers', offset: -260 },
-    { to: 'testimonials', label: 'Testimonials', offset: -260 },
+    { to: 'program', label: 'Program', offset: -30 },
+    { to: 'about', label: 'About Us', offset: -15 },
+    { to: 'carrer', label: 'Careers', offset: -20 },
+    //{ to: 'testimonials', label: 'Testimonials', offset: -260 },
   ];
 
   return (
@@ -55,11 +55,24 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+
+            {/* --- NEW THEME TOGGLE (Desktop) --- */}
+            <li className="navbar__item">
+              <button 
+                onClick={toggleTheme} 
+                className="navbar__theme-toggle"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? '🌙' : '☀️'}
+              </button>
+            </li>
+            {/* --- END OF NEW BLOCK --- */}
+
             <li className="navbar__item">
               <Link
                 to="contact"
                 smooth={true}
-                offset={-260}
+                offset={-30}
                 duration={500}
                 className="navbar__cta"
               >
@@ -86,11 +99,7 @@ const Navbar = () => {
               <li key={item.to} className="navbar__mobile-item">
                 <Link
                   to={item.to}
-                  smooth={true}
-                  offset={item.offset}
-                  duration={500}
-                  spy={true}
-                  onSetActive={handleSetActive}
+                  // ... (all other props)
                   className={`navbar__mobile-link ${
                     activeLink === item.to ? 'navbar__mobile-link--active' : ''
                   }`}
@@ -100,12 +109,22 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            
+            {/* --- NEW THEME TOGGLE (Mobile) --- */}
+            <li className="navbar__mobile-item">
+              <button 
+                onClick={toggleTheme} 
+                className="navbar__mobile-theme-toggle"
+              >
+                {theme === 'light' ? '🌙 Switch to Dark Mode' : '☀️ Switch to Light Mode'}
+              </button>
+            </li>
+            {/* --- END OF NEW BLOCK --- */}
+
             <li className="navbar__mobile-item">
               <Link
                 to="contact"
-                smooth={true}
-                offset={-260}
-                duration={500}
+                // ... (all other props)
                 className="navbar__mobile-cta"
                 onClick={() => setMobileMenu(false)}
               >
