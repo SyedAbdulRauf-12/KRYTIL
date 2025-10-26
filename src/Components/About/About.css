@@ -205,17 +205,25 @@
   .about__container {
     grid-template-columns: 1fr;
     gap: 3rem;
+    border-radius: 20px;
   }
   .about__content {
     max-width: 100%;
-    text-align: center;
+    text-align: justify;
   }
   .about__title {
-    font-size: 2rem;
+    font-size: 3rem;
+    text-align: center;
+  }
+  .about__badge{
+    font-size: 1.5rem;
+  }
+  .about__left{
+    order: 2;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .about {
     padding: 60px 0;
   }

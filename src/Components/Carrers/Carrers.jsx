@@ -66,7 +66,7 @@ const Careers = () => {
             The Krytil <span className="gradient-text">Skill-to-Paycheck</span> Pipeline
           </h1>
           <p className="careers__subtitle">
-            At KRYTIL, our mission is simple: to transform dedicated learners into highly compensated, 
+            At Krytil, our mission is simple: to transform dedicated learners into highly compensated, 
             job-ready technology professionals...
           </p>
         </div>

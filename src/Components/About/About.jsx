@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "./About.css";
 import about_img from "../../assets/GIF/letters-fall.gif";
-import play_icon from "../../assets/play-icon.png";
+//import play_icon from "../../assets/play-icon.png";
 
 // --- 1. Import the hook from the library you just installed ---
 import { useInView } from 'react-intersection-observer';
 
 const About = () => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+ // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
-  const handlePlayVideo = () => {
+  /*const handlePlayVideo = () => {
     setIsVideoPlaying(true);
     // Add your video play logic here
     console.log("Play video clicked");
-  };
+  };*/
 
   // --- 2. Set up the hook to watch the section ---
   const { ref, inView } = useInView({
@@ -67,23 +67,12 @@ const About = () => {
             
             <div className="about__description">
               <p className="about__text">
-                At KRYTIL, we exist to bridge the critical gap between academic theory
-                and real-world tech industry demands. We are tired of the traditional
-                "learn theory, get confused, repeat" cycle. We skip the outdated
-                material and teach the essential, in-demand skills that companies are
-                actively hiring for—today.
-              </p>
-              
-              <p className="about__text">
-                From <strong>Artificial Intelligence</strong> to <strong>Cybersecurity</strong>, 
-                from <strong>Cloud Infrastructure</strong> to <strong>Full Stack Development</strong>, 
-                we transform motivated students and recent graduates into highly skilled, 
-                job-ready tech professionals.
-              </p>
-              
-              <p className="about__text">
-                If your ambition is a high-paying tech career or to successfully
-                launch your own venture, Krytil is your focused and direct pathway.
+                At Krytil, we're closing the gap between academic learning and real-world tech demands by 
+                building AI-powered products that help learners master industry-ready skills fast. 
+                From AI and Cybersecurity to Cloud and Full Stack Development, 
+                we turn ambition into capability — empowering future innovators to land 
+                high-impact roles or launch their own ventures. 
+                With Krytil, you don’t just learn tech — you become part of it.
               </p>
             </div>
 
