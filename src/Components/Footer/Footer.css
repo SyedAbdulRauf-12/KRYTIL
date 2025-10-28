@@ -1,13 +1,25 @@
 /* Footer Section */
-.footer {
-  /* Using the theme variables for background */
-  background: rgb(190, 189, 189);
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  position: relative;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Light mode (default) */
+:root {
+  --footer-input-border: #333; /* Dark border in light mode */
 }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --footer-input-border: #fff; /* White border in dark mode */
+  }
+}
+
+.footer {
+  background: var(--bg-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* ✅ Safari & iOS support */
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
 
 .footer__top-section {
   padding: 4rem 0;
@@ -35,7 +47,7 @@
   gap: 0.5rem;
   /* Using your gradient for the badge background */
   background: var(--gradient-brand);
-  color: white;
+  color: rgb(242, 240, 240);
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.8rem;
@@ -93,7 +105,7 @@
 .footer__newsletter-button {
   /* Using your gradient for the button background */
   background: var(--gradient-brand);
-  color: white;
+  color: rgb(254, 253, 253);
   padding: 1rem 2rem;
   border-radius: 12px;
   border: none;
@@ -101,12 +113,12 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); /* Kept original shadow color */
+  box-shadow: 0 4px 15px rgb(0, 82, 247); /* Kept original shadow color */
 }
 
 .footer__newsletter-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); /* Kept original shadow color */
+  box-shadow: 0 8px 25px rgb(249, 249, 251); /* Kept original shadow color */
 }
 
 .footer__main-section {
@@ -270,7 +282,7 @@
   right: 25px;
   /* Using your gradient for the button background */
   background: var(--gradient-brand);
-  color: white;
+  color: rgb(252, 249, 249);
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -286,7 +298,7 @@
 
 .scroll-to-top:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); /* Kept original shadow color */
+  box-shadow: 0 8px 25px rgb(119, 158, 235); /* Kept original shadow color */
 }
 
 .scroll-to-top img {
